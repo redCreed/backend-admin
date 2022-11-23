@@ -1,0 +1,5 @@
+{"level":"error","time":"2022-11-23T10:14:21.021+0800","line":"C:/go/gopath/src/backend-admin/internal/app/common/response/response.go:41","msg":"stack error trace:\nErrCode:114，ErrMsg:数据不存在\n"}
+{"level":"error","time":"2022-11-23T10:20:37.580+0800","line":"C:/go/gopath/src/backend-admin/internal/app/common/response/response.go:41","msg":"stack error trace:\nErrCode:114，ErrMsg:数据不存在\n"}
+{"level":"error","time":"2022-11-23T10:21:22.018+0800","line":"C:/go/gopath/src/backend-admin/internal/app/common/response/response.go:41","msg":"stack error trace:\nErrCode:114，ErrMsg:数据不存在\n"}
+{"level":"error","time":"2022-11-23T11:27:04.341+0800","line":"C:/go/gopath/src/backend-admin/internal/app/common/response/response.go:41","msg":"stack error trace:\nErrCode:114，ErrMsg:数据不存在\n"}
+{"level":"error","time":"2022-11-23T11:27:06.226+0800","line":"C:/go/gopath/src/backend-admin/internal/app/common/response/response.go:41","msg":"stack error trace:\nErrCode:114，ErrMsg:数据不存在\n"}

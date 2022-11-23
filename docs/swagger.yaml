@@ -1,0 +1,829 @@
+definitions:
+  dto.AddMenuParam:
+    properties:
+      apis:
+        description: api接口id集合
+        items:
+          type: integer
+        type: array
+      icon:
+        description: 菜单图标
+        type: string
+      is_show:
+        description: 是否显示1:正常 0:停用
+        type: integer
+      menu_name:
+        description: 菜单名称
+        type: string
+      menu_type:
+        description: 菜单类型 1:目录 2:菜单 3:按钮
+        enum:
+        - 1
+        - 2
+        - 3
+        type: integer
+      parent_id:
+        description: 父级菜单
+        type: integer
+      path:
+        description: 菜单路径
+        type: string
+      remark:
+        description: 备注
+        type: string
+      sort:
+        description: 排序
+        minimum: 0
+        type: integer
+      status:
+        description: 状态 -1:删除 1:正常 2:停用
+        enum:
+        - 1
+        - 2
+        type: integer
+      title:
+        description: 菜单标题
+        type: string
+    required:
+    - menu_name
+    - menu_type
+    - status
+    type: object
+  dto.AddRoleParam:
+    properties:
+      flag:
+        description: 标志位
+        type: string
+      menu_ids:
+        description: 菜单id集合
+        items:
+          type: integer
+        type: array
+      remark:
+        description: 备注
+        type: string
+      role_key:
+        description: 角色唯一key
+        type: string
+      role_name:
+        description: 角色名称
+        type: string
+      role_sort:
+        description: 角色排序
+        minimum: 0
+        type: integer
+    required:
+    - menu_ids
+    - role_key
+    - role_name
+    type: object
+  dto.AddUserReq:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      nick_name:
+        description: 昵称
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      remark:
+        description: 备注
+        type: string
+      role_id:
+        description: 角色id集合
+        items:
+          type: integer
+        maxItems: 200
+        minItems: 0
+        type: array
+        uniqueItems: true
+      sex:
+        description: 性别
+        type: string
+      username:
+        description: 用户名(唯一且不能修改)
+        type: string
+    required:
+    - password
+    - role_id
+    - username
+    type: object
+  dto.RoleInfo:
+    properties:
+      role_id:
+        description: 角色id
+        type: integer
+      role_name:
+        description: 角色名称
+        type: string
+      user_id:
+        description: 用户id
+        type: integer
+    type: object
+  dto.RoleListResp:
+    properties:
+      count:
+        description: 数据总数
+        type: integer
+      data:
+        description: 数据集合
+        items:
+          $ref: '#/definitions/models.SysRole'
+        type: array
+    type: object
+  dto.SysUserList:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      createBy:
+        description: 创建者
+        type: integer
+      createdAt:
+        description: 创建时间
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      nick_name:
+        description: 昵称
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      remark:
+        description: 备注
+        type: string
+      roles:
+        description: 角色集合
+        items:
+          $ref: '#/definitions/dto.RoleInfo'
+        type: array
+      sex:
+        description: 性别
+        type: string
+      status:
+        description: 状态 -1:删除 1:正常 2:停用
+        type: integer
+      updateBy:
+        description: 更新者
+        type: integer
+      updatedAt:
+        description: 最后更新时间
+        type: string
+      user_id:
+        description: 用户id
+        type: integer
+      username:
+        description: 用户名(唯一且不能修改)
+        type: string
+    type: object
+  dto.UpdateMenuParam:
+    properties:
+      apis:
+        description: api接口id集合
+        items:
+          type: integer
+        type: array
+      icon:
+        description: 菜单图标
+        type: string
+      is_show:
+        description: 是否显示1:正常 0:停用
+        type: integer
+      menu_name:
+        description: 菜单名称
+        type: string
+      menu_type:
+        description: 菜单类型 1:目录 2:菜单 3:按钮
+        enum:
+        - 1
+        - 2
+        - 3
+        type: integer
+      menuId:
+        description: id
+        type: integer
+      parent_id:
+        description: 父级菜单
+        minimum: 0
+        type: integer
+      path:
+        description: 菜单路径
+        type: string
+      remark:
+        description: 备注
+        type: string
+      sort:
+        description: 排序
+        minimum: 0
+        type: integer
+      status:
+        description: 状态 -1:删除 1:正常 2:停用
+        enum:
+        - 1
+        - 2
+        type: integer
+      title:
+        description: 菜单标题
+        type: string
+    required:
+    - menu_name
+    - menu_type
+    - status
+    type: object
+  dto.UpdateRoleParam:
+    properties:
+      flag:
+        description: 标志位
+        type: string
+      menu_ids:
+        description: 菜单id集合
+        items:
+          type: integer
+        type: array
+      remark:
+        description: 备注
+        type: string
+      role_id:
+        description: 角色编码
+        type: integer
+      role_name:
+        description: 角色名称
+        type: string
+      role_sort:
+        description: RoleKey  *string `form:"role_key" json:"role_key"  validate:"required"
+          `  //角色key不能修改
+        type: integer
+    required:
+    - menu_ids
+    - role_name
+    type: object
+  dto.UpdateUserReq:
+    properties:
+      avatar:
+        description: 头像
+        type: string
+      email:
+        description: 邮箱
+        type: string
+      nick_name:
+        description: 昵称
+        type: string
+      password:
+        description: 密码
+        type: string
+      phone:
+        description: 手机号
+        type: string
+      remark:
+        description: 备注
+        type: string
+      role_id:
+        description: 角色id集合
+        items:
+          type: integer
+        maxItems: 200
+        minItems: 0
+        type: array
+        uniqueItems: true
+      sex:
+        description: 性别
+        type: string
+    required:
+    - role_id
+    type: object
+  dto.UpdateUserRoleReq:
+    properties:
+      role_id:
+        description: 角色id集合
+        items:
+          type: integer
+        maxItems: 200
+        minItems: 0
+        type: array
+        uniqueItems: true
+    type: object
+  dto.UserListResp:
+    properties:
+      count:
+        description: 数据总数
+        type: integer
+      data:
+        description: 数据集合
+        items:
+          $ref: '#/definitions/dto.SysUserList'
+        type: array
+    type: object
+  dto.UserLoginReq:
+    properties:
+      password:
+        description: 用户密码
+        type: string
+      username:
+        description: 用户名称
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  dto.UserToken:
+    properties:
+      token:
+        description: 登录token
+        type: string
+    type: object
+  models.SysApi:
+    properties:
+      createBy:
+        type: integer
+      createdAt:
+        type: string
+      handle:
+        type: string
+      id:
+        type: integer
+      method:
+        type: string
+      path:
+        type: string
+      title:
+        type: string
+      updateBy:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  models.SysRole:
+    properties:
+      admin:
+        description: 是否是管理员角色
+        type: boolean
+      createBy:
+        type: integer
+      createdAt:
+        type: string
+      flag:
+        description: 标志位
+        type: string
+      remark:
+        type: string
+      roleId:
+        description: 角色编码
+        type: integer
+      roleKey:
+        description: 角色唯一key 不能修改
+        type: string
+      roleName:
+        description: 角色名称
+        type: string
+      roleSort:
+        description: 角色排序
+        type: integer
+      status:
+        type: integer
+      updateBy:
+        type: integer
+      updatedAt:
+        type: string
+    type: object
+  response.Response:
+    properties:
+      data:
+        description: Detail string `json:"detail"`
+      msg:
+        type: string
+      ret:
+        type: integer
+    type: object
+info:
+  contact: {}
+  description: 后台管理系统
+  title: backend-admin
+  version: v1
+paths:
+  /v1/sys/api/:id:
+    put:
+      consumes:
+      - application/json
+      description: 更新api接口
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/models.SysApi'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新api接口
+      tags:
+      - api
+  /v1/sys/api/generate:
+    post:
+      consumes:
+      - application/json
+      description: 生成接口
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 生成接口
+      tags:
+      - api
+  /v1/sys/api/list:
+    get:
+      consumes:
+      - application/json
+      description: 接口列表
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  items:
+                    $ref: '#/definitions/models.SysApi'
+                  type: array
+              type: object
+      security:
+      - Bearer: []
+      summary: 接口列表
+      tags:
+      - api
+  /v1/sys/menu:
+    post:
+      consumes:
+      - application/json
+      description: 新增菜单
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddMenuParam'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 新增菜单
+      tags:
+      - menu
+  /v1/sys/menu/:id:
+    delete:
+      consumes:
+      - application/json
+      description: 删除菜单
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 删除菜单
+      tags:
+      - menu
+    put:
+      consumes:
+      - application/json
+      description: 更新菜单
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateMenuParam'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新菜单
+      tags:
+      - menu
+  /v1/sys/menu/list:
+    get:
+      consumes:
+      - application/json
+      description: 菜单列表
+      parameters:
+      - description: 页面
+        in: query
+        minimum: 1
+        name: page_no
+        required: true
+        type: integer
+      - description: 页大小
+        in: query
+        maximum: 200
+        minimum: 1
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.RoleListResp'
+              type: object
+      security:
+      - Bearer: []
+      summary: 菜单列表
+      tags:
+      - menu
+  /v1/sys/role:
+    post:
+      consumes:
+      - application/json
+      description: 增加角色
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddRoleParam'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 增加角色
+      tags:
+      - role
+  /v1/sys/role/:id:
+    delete:
+      consumes:
+      - application/json
+      description: 删除角色
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 删除角色
+      tags:
+      - role
+    put:
+      consumes:
+      - application/json
+      description: 更新角色
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateRoleParam'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新角色
+      tags:
+      - role
+  /v1/sys/role/list:
+    get:
+      consumes:
+      - application/json
+      description: 角色列表
+      parameters:
+      - description: 页面
+        in: query
+        minimum: 1
+        name: page_no
+        required: true
+        type: integer
+      - description: 页大小
+        in: query
+        maximum: 200
+        minimum: 1
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.RoleListResp'
+              type: object
+      security:
+      - Bearer: []
+      summary: 角色列表
+      tags:
+      - role
+  /v1/sys/token/login:
+    post:
+      consumes:
+      - application/json
+      description: 用户登录接口
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserLoginReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 用户登录
+      tags:
+      - token
+  /v1/sys/token/logout:
+    post:
+      consumes:
+      - application/json
+      description: 用户退出
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 用户退出
+      tags:
+      - token
+  /v1/sys/token/refresh:
+    post:
+      consumes:
+      - application/json
+      description: 用户token刷新
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UserToken'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 用户token刷新
+      tags:
+      - token
+  /v1/sys/user:
+    post:
+      consumes:
+      - application/json
+      description: 新增用户
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.AddUserReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 新增用户
+      tags:
+      - user
+  /v1/sys/user/:user_id:
+    delete:
+      consumes:
+      - application/json
+      description: 删除用户
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 删除用户
+      tags:
+      - user
+    put:
+      consumes:
+      - application/json
+      description: 更新用户
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateUserReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新用户
+      tags:
+      - user
+  /v1/sys/user/:user_id/role:
+    put:
+      consumes:
+      - application/json
+      description: 更新用户角色
+      parameters:
+      - description: body
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/dto.UpdateUserRoleReq'
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/response.Response'
+      security:
+      - Bearer: []
+      summary: 更新用户角色
+      tags:
+      - user
+  /v1/sys/user/list:
+    get:
+      consumes:
+      - application/json
+      description: 用户列表
+      parameters:
+      - description: 页面
+        in: query
+        minimum: 1
+        name: page_no
+        required: true
+        type: integer
+      - description: 页大小
+        in: query
+        maximum: 200
+        minimum: 1
+        name: page_size
+        required: true
+        type: integer
+      responses:
+        "200":
+          description: OK
+          schema:
+            allOf:
+            - $ref: '#/definitions/response.Response'
+            - properties:
+                data:
+                  $ref: '#/definitions/dto.UserListResp'
+              type: object
+      security:
+      - Bearer: []
+      summary: 用户列表
+      tags:
+      - user
+swagger: "2.0"
