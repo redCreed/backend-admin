@@ -31,6 +31,7 @@ require (
 	github.com/alibaba/sentinel-golang v1.0.4
 	github.com/alibaba/sentinel-golang/pkg/adapters/gin v0.0.0-20221011112204-0d804bbadda5
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect
+	github.com/fvbock/endless v0.0.0-20170109170031-447134032cb6
 	github.com/sony/sonyflake v1.1.0
 	github.com/swaggo/swag v1.8.7
 )

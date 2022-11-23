@@ -9,10 +9,9 @@ import (
 	"back-admin/pkg/queue"
 	"context"
 	"fmt"
+	"github.com/fvbock/endless"
 	"github.com/gin-gonic/gin"
 	"github.com/spf13/cobra"
-	"net/http"
-	"runtime"
 )
 
 var (
@@ -68,35 +67,30 @@ func startHttpServer() {
 
 	//开启pprof监听
 	go func() {
-		if runtime.GOOS == "windows" {
-			http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", driver.Conf.Http.Pprof.Port), nil)
-		} else {
-			//endless不支持windows  需要修改signal
-			//endless.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", driver.Conf.Http.Pprof.Port), nil)
+		//http.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", driver.Conf.Http.Pprof.Port), nil)
+		if err := endless.ListenAndServe(fmt.Sprintf("0.0.0.0:%s", driver.Conf.Http.Pprof.Port), nil); err != nil {
+			fmt.Println("pprof err:", err)
 		}
 	}()
 
 	srv := app.New(engin)
 	srv.Start(context.Background())
 
-	//start http service 平滑升级
-	//if err := endless.ListenAndServe(fmt.Sprintf(":%s", driver.Conf.Http.Port), engin); err != nil {
+	/*
+		endless平滑重启
+		1、启动服务
+		2、找到服务的pid，然后kill -1
+			ps -ef | grep main
+			kill -1 pid
+		3、重启服务
+	*/
+	if err := endless.ListenAndServe(fmt.Sprintf(":%s", driver.Conf.Http.Port), engin); err != nil {
+		panic(err)
+	}
+	//if err := engin.Run(fmt.Sprintf(":%s", driver.Conf.Http.Port)); err != nil {
 	//	fmt.Println("start http service:", err)
 	//}
-	if err := engin.Run(fmt.Sprintf(":%s", driver.Conf.Http.Port)); err != nil {
-		fmt.Println("start http service:", err)
-	}
-	//与endless 互斥
 	//quit := make(chan os.Signal)
 	//signal.Notify(quit, syscall.SIGKILL, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	//<-quit
 }
-
-/*
-	endless平滑重启
-	1、启动服务
-	2、找到服务的pid，然后kill -1
-		ps -ef | grep main
- 		kill -1 pid
-	3、重启服务
-*/
